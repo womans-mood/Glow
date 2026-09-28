@@ -25,6 +25,7 @@ window.claude = { use: async name => {
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const lede = document.querySelector('.top .lede'); if (lede) lede.textContent = 'Вставьте готовые тексты постов: агент разложит их на слайды 1200 × 1600 — обложка, слайды и финал. Каждый слайд можно поправить перед скачиванием.';
+  const t = document.querySelector('.top h1'); if (t && t.firstChild && t.firstChild.nodeType === 3) t.firstChild.nodeValue = 'Карусельная 🎠 '; document.title = 'Карусельная 🎠 by @womans_bloging';
   const h = document.querySelector('[data-panel="1"] > .card:first-child h2'); if (h) h.textContent = 'Настройки';
   const box = document.querySelector('#pasteBox'); if (box) { box.open = true; box.addEventListener('toggle', () => { box.open = true; }); }
 });
