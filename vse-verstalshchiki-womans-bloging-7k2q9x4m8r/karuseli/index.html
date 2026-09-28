@@ -16,17 +16,25 @@ window.claude = { use: async name => {
 } };
 </script>
 <style>
-/* standalone site: no Claude here, so the part where the agent studies the channel and writes the texts is hidden — only ready texts are pasted */
-#claudeBanner, [data-panel="1"] > .card:first-child > p.muted.small, label[for="chName"], .row:has(#fileTg), label[for="pastePosts"], #nCarRow,
-.fld:has(#modePick), .fld:has(#endPick), .fld:has(#headSrcPick), #ownHeadsBox, .fld:has(#fillPick), label[for="genNote"], .row:has(#genBtn), #planBox, #pasteBox > summary { display: none !important; }
+/* standalone site: no Claude here, so everything where the agent studies the channel and writes the texts is removed — only ready texts are pasted */
+#claudeBanner, #usedRow, #usedReset, #clearPosts, #loadMsg, #fileTg, #fileInfo, #pastePosts, #nCarRow, #ownHeadsBox, #genNote, #genBtn, #genMsg, #planBox, #writeBtn, #replanBtn, #aiBox, #runDesign, #fixDesign, #compareDesign, #resetDesign, #pasteBox > summary, .site-cut { display: none !important; }
 #endTextBox { display: block !important; }
-#pasteBox > summary + .spread { margin-top: 0 !important; }
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const lede = document.querySelector('.top .lede'); if (lede) lede.textContent = 'Вставьте готовые тексты постов: агент разложит их на слайды 1200 × 1600 — обложка, слайды и финал. Каждый слайд можно поправить перед скачиванием.';
-  const h = document.querySelector('[data-panel="1"] > .card:first-child h2'); if (h) h.textContent = 'Настройки';
-  const box = document.querySelector('#pasteBox'); if (box) { box.open = true; box.addEventListener('toggle', () => { box.open = true; }); }
+  const $ = q => document.querySelector(q), cut = e => e && e.classList.add('site-cut');
+  const lede = $('.top .lede'); if (lede) lede.textContent = 'Вставьте готовые тексты постов: агент разложит их на слайды 1200 × 1600 — обложка, слайды и финал. Каждый слайд можно поправить перед скачиванием.';
+  const card = $('[data-panel="1"] > .card');
+  if (card) { const h = card.querySelector('h2'); if (h) h.textContent = 'Настройки'; card.querySelectorAll(':scope > p.muted.small').forEach(cut); }
+  ['label[for="chName"]', 'label[for="pastePosts"]', 'label[for="genNote"]'].forEach(q => cut($(q)));
+  ['#fileTg', '#genBtn'].forEach(q => { const e = $(q); cut(e && e.closest('.row')); });
+  ['#modePick', '#endPick', '#headSrcPick', '#fillPick'].forEach(q => { const e = $(q); cut(e && e.closest('.fld')); });
+  const box = $('#pasteBox');
+  if (box) {
+    box.open = true; box.addEventListener('toggle', () => { box.open = true; });
+    const sp = box.querySelector('.spread'); if (sp) { sp.style.marginTop = '0'; const t = sp.querySelector('.muted'); if (t) t.textContent = 'Ваши готовые тексты'; }
+    const p = box.querySelector(':scope > p.muted.small'); if (p) p.textContent = 'Вставьте текст сюда или загрузите файл .md / .txt. Каждый абзац, отделённый пустой строкой, станет слайдом, а строка «———» начнёт новую карусель. Можно размечать слайды строками «Слайд 1», «Слайд 2»…';
+  }
 });
 </script>
 <title>Карусельная 🎠 by @womans_bloging</title>
