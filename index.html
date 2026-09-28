@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><!-- iPhone: no zoom-in when a field is tapped (pinch-zoom still works) -->
 <meta name="robots" content="noindex">
 <script>
 /* standalone site: saving files without claude.ai — a normal download (on phones the agent itself uses «Поделиться»); Claude features are not available here */
@@ -14,6 +14,25 @@ window.claude = { use: async name => {
   } };
   throw { code: 'unavailable' };
 } };
+</script>
+<script>
+/* standalone site: text copied with bold (ChatGPT, Docs, Notes, Telegram) keeps its lines exactly as a plain paste would, and the bold parts get **…** */
+(() => {
+  const boldPhrases = html => { const doc = new DOMParser().parseFromString(html, 'text/html'), out = [];
+    const isBold = n => { if (n.nodeType !== 1) return false; const st = (n.getAttribute('style') || '').toLowerCase(); if (/font-weight\s*:\s*(normal|[1-5]00)/.test(st)) return false; return n.tagName === 'B' || n.tagName === 'STRONG' || /font-weight\s*:\s*(bold|[6-9]00)/.test(st); };
+    const walk = n => { for (const c of n.childNodes) { if (isBold(c) && !c.querySelector('p,div,li,br')) { const t = c.textContent.replace(/\s+/g, ' ').trim(); if (t && !/^[*]+$/.test(t)) out.push(t); } else if (c.nodeType === 1) walk(c); } };
+    walk(doc.body); return out; };
+  const markBold = (plain, phrases) => { let res = '', at = 0;
+    phrases.forEach(ph => { const re = new RegExp(ph.split(' ').map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+')); const m = re.exec(plain.slice(at)); if (!m) return;
+      const i = at + m.index; if (plain.slice(Math.max(0, i - 2), i) === '**') return; res += plain.slice(at, i) + '**' + m[0] + '**'; at = i + m[0].length; });
+    return res + plain.slice(at); };
+  document.addEventListener('paste', e => {
+    const ta = e.target; if (!ta || ta.tagName !== 'TEXTAREA' || !e.clipboardData) return;
+    const html = e.clipboardData.getData('text/html'), plain = e.clipboardData.getData('text/plain'); if (!html || !plain) return;
+    const ph = boldPhrases(html); if (!ph.length) return;
+    e.preventDefault(); ta.setRangeText(markBold(plain, ph), ta.selectionStart, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input', { bubbles: true }));
+  }, true);
+})();
 </script>
 <title>Пины Natally Glow by @womans_bloging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
