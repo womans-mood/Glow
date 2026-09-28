@@ -15,6 +15,20 @@ window.claude = { use: async name => {
   throw { code: 'unavailable' };
 } };
 </script>
+<style>
+/* standalone site: no Claude here, so the part where the agent studies the channel and writes the texts is hidden — only ready texts are pasted */
+#claudeBanner, [data-panel="1"] > .card:first-child > p.muted.small, label[for="chName"], .row:has(#fileTg), label[for="pastePosts"], #nCarRow,
+.fld:has(#modePick), .fld:has(#endPick), .fld:has(#headSrcPick), #ownHeadsBox, .fld:has(#fillPick), label[for="genNote"], .row:has(#genBtn), #planBox, #pasteBox > summary { display: none !important; }
+#endTextBox { display: block !important; }
+#pasteBox > summary + .spread { margin-top: 0 !important; }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lede = document.querySelector('.top .lede'); if (lede) lede.textContent = 'Вставьте готовые тексты постов: агент разложит их на слайды 1200 × 1600 — обложка, слайды и финал. Каждый слайд можно поправить перед скачиванием.';
+  const h = document.querySelector('[data-panel="1"] > .card:first-child h2'); if (h) h.textContent = 'Настройки';
+  const box = document.querySelector('#pasteBox'); if (box) { box.open = true; box.addEventListener('toggle', () => { box.open = true; }); }
+});
+</script>
 <title>Карусели by @womans_bloging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
