@@ -29,7 +29,10 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .demo .lead{color:var(--ink);font-weight:600;text-align:center;margin:0 0 14px}
 .shots{position:relative;display:flex;gap:12px;margin:0 -16px 12px;padding:0 16px 6px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .shots::-webkit-scrollbar{display:none}
-.shots img{flex:none;width:80%;min-width:0;max-width:400px;height:auto;align-self:flex-start;scroll-snap-align:center;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+.shots figure{flex:none;width:80%;min-width:0;max-width:400px;margin:0;scroll-snap-align:center}
+.shots img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+.shots figcaption{display:flex;gap:10px;align-items:flex-start;margin-top:12px;color:var(--ink);font-weight:600;line-height:1.35;text-align:left}
+.shots figcaption span{flex:none;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700}
 .dots{display:flex;justify-content:center;gap:6px;margin:0 0 28px}
 .dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
 .dots i.on{background:var(--ink)}
@@ -54,10 +57,12 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
     </ol>
     <p class="lead">Вот, как это выглядит 👇🏻</p>
     <div class="shots">
-      <img src="img/primer-1.jpg" width="1206" height="1344" loading="lazy" alt="Агент разобрал текст на три статичных пина">
-      <img src="img/primer-2.jpg" width="1206" height="1208" loading="lazy" alt="Готовая карусель из пяти слайдов, свёрстанная агентом">
+      <figure><img src="img/shag-1.jpg" width="1206" height="1254" loading="lazy" alt="Поле «Тексты» с текстом для нескольких пинов"><figcaption><span>1</span>Выставляете текст или пачку текста</figcaption></figure>
+      <figure><img src="img/shag-2.jpg" width="1206" height="1189" loading="lazy" alt="Агент сверстал три карусели"><figcaption><span>2</span>Он делает из них несколько каруселей</figcaption></figure>
+      <figure><img src="img/shag-3.jpg" width="1206" height="1120" loading="lazy" alt="Карусель с фото на обложке и другим дизайном"><figcaption><span>3</span>Если надо — с разным дизайном</figcaption></figure>
+      <figure><img src="img/shag-4.jpg" width="1206" height="989" loading="lazy" alt="Окно «Готово: 14 слайдов» с кнопкой «Сохранить в галерею»"><figcaption><span>4</span>Вы сохраняете все слайды пачкой</figcaption></figure>
     </div>
-    <div class="dots" aria-hidden="true"><i class="on"></i><i></i></div>
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
     <p class="note">Данный агент работает <b>БЕЗ впн и подписок на нейросети</b> 🤌🏻</p>
     <p class="note">Агента можно сделать и для других задач, под ваш запрос</p>
     <div class="cta"><a class="btn" href="https://t.me/KrisKrisIT" target="_blank" rel="noopener">Заказать</a></div>
