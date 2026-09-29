@@ -21,6 +21,17 @@ h1{font:600 clamp(26px,7vw,38px)/1.15 var(--display);margin:0 0 16px}
 p{color:var(--muted);margin:0 0 28px}
 a.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;padding:16px 28px;border-radius:999px}
 a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.demo{margin-top:44px;padding-top:36px;border-top:1px solid var(--line);text-align:left}
+.demo h2{font:600 20px/1.25 var(--display);margin:0 0 16px;text-align:center}
+.demo ol{margin:0 0 28px;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+.demo li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;color:var(--ink)}
+.demo li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:13px}
+.demo .lead{color:var(--ink);font-weight:600;text-align:center;margin:0 0 14px}
+.shots{display:grid;gap:14px;margin:0 0 28px}
+.shots img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+.demo .note{color:var(--ink);text-align:center;margin:0 0 10px}
+.demo .note b{font-weight:700}
+.demo .cta{text-align:center;margin-top:24px}
 </style>
 </head>
 <body>
@@ -28,7 +39,24 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   <p class="eyebrow">@womans_bloging</p>
   <h1>Свой AI-агент для вашего блога</h1>
   <p>Заказать своего AI-агента можно по ссылке ниже</p>
-  <a class="btn" href="https://t.me/womans_bloging" target="_blank" rel="noopener">Заказать AI-агента</a>
+  <a class="btn" href="https://t.me/KrisKrisIT" target="_blank" rel="noopener">Заказать AI-агента</a>
+
+  <section class="demo" aria-labelledby="demoTitle">
+    <h2 id="demoTitle">Пример агента</h2>
+    <ol>
+      <li>Мы загружаем ваш дизайн пинов в любых вариантах</li>
+      <li>Вы загружаете текст (можно сразу пачкой для 5–10 пинов)</li>
+      <li>Агент сам верстает пины по вашему тексту</li>
+    </ol>
+    <p class="lead">Вот, как это выглядит 👇🏻</p>
+    <div class="shots">
+      <img src="img/primer-1.jpg" width="1206" height="1344" loading="lazy" alt="Агент разобрал текст на три статичных пина">
+      <img src="img/primer-2.jpg" width="1206" height="1208" loading="lazy" alt="Готовая карусель из пяти слайдов, свёрстанная агентом">
+    </div>
+    <p class="note">Данный агент работает <b>БЕЗ впн и подписок на нейросети</b> 🤌🏻</p>
+    <p class="note">Агента можно сделать и для других задач, под ваш запрос</p>
+    <div class="cta"><a class="btn" href="https://t.me/KrisKrisIT" target="_blank" rel="noopener">Заказать</a></div>
+  </section>
 </main>
 </body>
 </html>
