@@ -18,6 +18,34 @@ window.claude = { use: async name => {
   throw { code: 'unavailable' };
 } };
 </script>
+<script>
+/* a page added to the phone's home screen is only woken up, not reloaded: on opening and whenever it comes back to the screen it asks the site whether a newer version is out, and offers to update */
+(() => {
+  const check = async () => {
+    if (document.getElementById('updBar')) return;
+    try {
+      const r = await fetch(location.pathname, { method: 'HEAD', cache: 'no-store' });
+      const srv = Date.parse(r.headers.get('last-modified') || ''), mine = Date.parse(document.lastModified);
+      if (r.ok && srv && mine && srv - mine > 60000) bar();
+    } catch (_) {}
+  };
+  const bar = () => {
+    const b = document.createElement('div'); b.id = 'updBar'; b.setAttribute('role', 'status');
+    b.style.cssText = 'position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:2147483000;background:#1F1A1D;color:#FFFFFF;border-radius:14px;padding:10px 12px 10px 16px;display:flex;gap:10px;align-items:center;font:600 15px/1.3 -apple-system,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:520px;margin:0 auto';
+    const t = document.createElement('span'); t.textContent = 'Вышло обновление'; t.style.flex = '1';
+    const go = document.createElement('button'); go.type = 'button'; go.textContent = 'Обновить';
+    go.style.cssText = 'font:inherit;border:0;border-radius:10px;padding:9px 16px;background:#B8175A;color:#FFFFFF;cursor:pointer';
+    go.onclick = () => location.replace(location.pathname + '?u=' + Date.now()); // a new address: the phone has to load the page afresh
+    const x = document.createElement('button'); x.type = 'button'; x.textContent = '✕'; x.setAttribute('aria-label', 'Закрыть');
+    x.style.cssText = 'font:inherit;border:0;background:none;color:#FFFFFF;opacity:.7;padding:6px;cursor:pointer';
+    x.onclick = () => b.remove();
+    b.append(t, go, x); document.body.append(b);
+  };
+  addEventListener('load', check);
+  addEventListener('pageshow', e => { if (e.persisted) check(); });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
+})();
+</script>
 <title>Вика, про опору by @womans_bloging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
