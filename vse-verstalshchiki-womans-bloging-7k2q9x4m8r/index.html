@@ -27,18 +27,20 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .demo li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;color:var(--ink)}
 .demo li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:13px}
 .demo .lead{color:var(--ink);font-weight:600;text-align:center;margin:0 0 14px}
-.shots{position:relative;display:flex;gap:12px;margin:0 -16px 12px;padding:0 16px 6px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.showcase{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px 0 16px;margin:0 0 28px;overflow:hidden} /* the screenshots sit on a white card of their own, so they stand out from the page */
+.shots{position:relative;display:flex;gap:12px;margin:0 0 14px;padding:0 18px 4px;scroll-padding:0 18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .shots::-webkit-scrollbar{display:none}
 .shots figure{flex:none;width:80%;min-width:0;max-width:400px;margin:0;scroll-snap-align:center}
-.shots img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line);background:var(--surface)}
+.shots img{display:block;width:100%;height:auto;border-radius:18px;border:2px solid var(--accent);background:var(--surface)}
 .shots figcaption{display:flex;gap:10px;align-items:flex-start;margin-top:12px;color:var(--ink);font-weight:600;line-height:1.35;text-align:left}
 .shots figcaption span{flex:none;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700}
-.dots{display:flex;justify-content:center;gap:6px;margin:0 0 28px}
+.dots{display:flex;justify-content:center;gap:6px;margin:0}
 .dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
 .dots i.on{background:var(--ink)}
 .demo .note{color:var(--ink);text-align:center;margin:0 0 10px}
 .demo .note b{font-weight:700}
 .demo .note.top{margin:-4px 0 18px}
+.demo .note.after{margin:18px 0 0;color:var(--muted)}
 .demo .cta{text-align:center;margin-top:24px;padding-bottom:12px}
 .demo .cta .btn{display:block;width:100%;max-width:360px;margin:0 auto;box-shadow:0 8px 24px rgba(0,0,0,.18)} /* wide, with the soft glow under it, like the club pages */
 </style>
@@ -59,6 +61,7 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
       <li>Агент сам верстает пины по вашему тексту</li>
     </ol>
     <p class="lead">Вот, как это выглядит 👇🏻</p>
+    <div class="showcase">
     <div class="shots">
       <figure><img src="img/shag-1.jpg" width="1206" height="1254" loading="lazy" alt="Поле «Тексты» с текстом для нескольких пинов"><figcaption><span>1</span>Выставляете текст или пачку текста</figcaption></figure>
       <figure><img src="img/shag-2.jpg" width="1206" height="1189" loading="lazy" alt="Агент сверстал три карусели"><figcaption><span>2</span>Он делает из них несколько каруселей</figcaption></figure>
@@ -66,8 +69,9 @@ a.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
       <figure><img src="img/shag-4.jpg" width="1206" height="989" loading="lazy" alt="Окно «Готово: 14 слайдов» с кнопкой «Сохранить в галерею»"><figcaption><span>4</span>Вы сохраняете все слайды пачкой</figcaption></figure>
     </div>
     <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
-    <p class="note">Агента можно сделать и для других задач, под ваш запрос</p>
+    </div>
     <div class="cta"><a class="btn" href="https://t.me/KrisKrisIT" target="_blank" rel="noopener">Заказать</a></div>
+    <p class="note after">Агента можно сделать и для других задач, под ваш запрос</p>
   </section>
 </main>
 <script>
